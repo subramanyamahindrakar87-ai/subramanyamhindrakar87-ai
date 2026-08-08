@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshBite – Online Food Ordering Platform</title>
+  <meta name="description" content="Order fresh, delicious gourmet food from top local restaurants near you. Fast 30-minute delivery to your doorstep.">
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="logo">
+        <i class="fas fa-utensils"></i>
+        <span>Fresh</span>Bite
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#restaurants">Restaurants</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#add-item"><i class="fas fa-plus-circle" style="color:var(--primary-orange);"></i> Add Item</a></li>
+        <li><a href="#cart">Cart</a></li>
+        <li><a href="#account">Account</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="action-btn" title="Wishlist" onclick="document.getElementById('account').scrollIntoView();">
+          <i class="far fa-heart"></i>
+        </button>
+        <button class="action-btn" title="Shopping Cart" onclick="document.getElementById('cart').scrollIntoView();">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="badge" id="cartBadgeCount">0</span>
+        </button>
+        <button class="btn-primary" onclick="openAuthModal()">Login</button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-header">
+      <div class="logo"><i class="fas fa-utensils"></i> Fresh<span>Bite</span></div>
+      <button style="background:none; border:none; font-size:1.4rem;" id="drawerCloseBtn"><i class="fas fa-times"></i></button>
+    </div>
+    <ul class="drawer-links">
+      <li><a href="#home" onclick="document.getElementById('mobileDrawer').classList.remove('open');">Home</a></li>
+      <li><a href="#restaurants" onclick="document.getElementById('mobileDrawer').classList.remove('open');">Restaurants</a></li>
+      <li><a href="#menu" onclick="document.getElementById('mobileDrawer').classList.remove('open');">Menu</a></li>
+      <li><a href="#cart" onclick="document.getElementById('mobileDrawer').classList.remove('open');">Cart</a></li>
+      <li><a href="#checkout" onclick="document.getElementById('mobileDrawer').classList.remove('open');">Checkout</a></li>
+      <li><a href="#account" onclick="document.getElementById('mobileDrawer').classList.remove('open');">Account</a></li>
+      <li><a href="#about" onclick="document.getElementById('mobileDrawer').classList.remove('open');">About Us</a></li>
+      <li><a href="#contact" onclick="document.getElementById('mobileDrawer').classList.remove('open');">Contact Us</a></li>
+    </ul>
+    <div>
+      <button class="btn-primary" style="width:100%;" onclick="openAuthModal()">Sign In / Register</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fas fa-fire"></i> #1 Food Delivery Service in Town
+        </div>
+        <h1>Delicious Meals Delivered Straight To Your <span>Doorstep.</span></h1>
+        <p>Craving pizza, burgers, sushi, or authentic Indian curries? Browse top rated kitchens and enjoy lightning fast 30-minute delivery.</p>
+
+        <div class="hero-search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="heroSearchInput" placeholder="Search for dishes, cuisines, or restaurants...">
+          <button class="btn-primary" onclick="document.getElementById('menu').scrollIntoView();">Search</button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h3>500+</h3>
+            <p>Gourmet Dishes</p>
+          </div>
+          <div class="stat-item">
+            <h3>30 Min</h3>
+            <p>Average Delivery</p>
+          </div>
+          <div class="stat-item">
+            <h3>4.9 ★</h3>
+            <p>15k+ Customer Reviews</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image-wrapper">
+        <img class="hero-img" src="assets/images/hero_banner.png" alt="FreshBite Gourmet Spread">
+        <div class="floating-card card-1">
+          <i class="fas fa-clock"></i>
+          <div>
+            <h4>Express Delivery</h4>
+            <p>Hot & fresh within 25-30 min</p>
+          </div>
+        </div>
+        <div class="floating-card card-2">
+          <i class="fas fa-percentage"></i>
+          <div>
+            <h4>Special Discount</h4>
+            <p>20% OFF code: <strong>FRESH20</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Promo Offers Banner Section -->
+  <section class="promo-section container">
+    <div class="promo-grid">
+      <div class="promo-card orange">
+        <div class="promo-content">
+          <h3>20% OFF Your First Order</h3>
+          <p>Treat yourself to fresh gourmet meals with instant discount.</p>
+          <span class="promo-code">Use Code: FRESH20</span>
+        </div>
+        <i class="fas fa-pizza-slice" style="font-size: 5rem; opacity: 0.2; position: absolute; right: 10px; bottom: 10px;"></i>
+      </div>
+      <div class="promo-card">
+        <div class="promo-content">
+          <h3>Zero Delivery Charges</h3>
+          <p>Free express delivery on orders over $25 across Springfield.</p>
+          <span class="promo-code">Use Code: FRESHFREE</span>
+        </div>
+        <i class="fas fa-motorcycle" style="font-size: 5rem; opacity: 0.2; position: absolute; right: 10px; bottom: 10px;"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- Restaurant Categories -->
+  <section class="section-padding container">
+    <div class="section-header">
+      <span class="sub-tag">Explore Cuisines</span>
+      <h2>Browse Food Categories</h2>
+      <p>Select your favorite food type and discover handcrafted meals prepared by expert chefs.</p>
+    </div>
+    <div class="category-grid" id="categoryGrid">
+      <!-- Injected dynamically by JS -->
+    </div>
+  </section>
+
+  <!-- Restaurant Listings Section -->
+  <section class="section-padding container" id="restaurants">
+    <div class="section-header">
+      <span class="sub-tag">Partner Kitchens</span>
+      <h2>Top Featured Restaurants</h2>
+      <p>Hand-picked, hygienic partner restaurants delivering premium taste.</p>
+    </div>
+    <div class="restaurant-grid" id="restaurantGrid">
+      <!-- Injected dynamically by JS -->
+    </div>
+  </section>
+
+  <!-- Main Menu Section -->
+  <section class="section-padding container" id="menu">
+    <div class="section-header">
+      <span class="sub-tag">Our Delicious Menu</span>
+      <h2>Explore Food & Beverages</h2>
+      <p>Freshly prepared items with dietary indicators and complete nutritional info.</p>
+    </div>
+
+    <!-- Filter Controls -->
+    <div class="filter-wrapper">
+      <div class="dietary-filters">
+        <button class="diet-btn active" onclick="filterDietary('all', this)">All Items</button>
+        <button class="diet-btn" onclick="filterDietary('veg', this)"><i class="fas fa-leaf" style="color: var(--veg-green);"></i> Veg Only</button>
+        <button class="diet-btn" onclick="filterDietary('nonveg', this)"><i class="fas fa-drumstick-bite" style="color: var(--nonveg-red);"></i> Non-Veg</button>
+        <button class="diet-btn" onclick="filterDietary('vegan', this)">🌱 Vegan</button>
+        <button class="diet-btn" onclick="filterDietary('glutenfree', this)">🌾 Gluten-Free</button>
+      </div>
+
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <input type="text" id="menuSearchInput" placeholder="Search dishes..." style="width: 220px;">
+        <div class="sort-wrapper">
+          <label for="sortSelect">Sort:</label>
+          <select id="sortSelect">
+            <option value="popular">Most Popular</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Food Cards Grid -->
+    <div class="food-grid" id="foodGrid">
+      <!-- Injected dynamically by JS -->
+    </div>
+  </section>
+
+  <!-- Add New Item Section (Chef / Partner Portal) -->
+  <section class="section-padding container" id="add-item">
+    <div class="section-header">
+      <span class="sub-tag">Chef & Partner Portal</span>
+      <h2>Add New Food Item</h2>
+      <p>Add a new delicious dish to the FreshBite menu with price, custom photo, and dietary details.</p>
+    </div>
+
+    <div style="max-width: 800px; margin: 0 auto; background: #FFF; padding: 36px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-md);">
+      <form id="addNewItemForm" onsubmit="handleAddNewItem(event)">
+        <div class="form-grid" style="margin-bottom: 20px;">
+          
+          <div class="form-group">
+            <label for="newItemName"><i class="fas fa-utensils"></i> Item Name *</label>
+            <input type="text" id="newItemName" placeholder="e.g. Truffle Mushroom Pasta" required>
+          </div>
+
+          <div class="form-group">
+            <label for="newItemPrice"><i class="fas fa-tag"></i> Price ($ USD) *</label>
+            <input type="number" step="0.01" min="0.50" id="newItemPrice" placeholder="e.g. 15.99" required>
+          </div>
+
+          <div class="form-group">
+            <label for="newItemCategory"><i class="fas fa-list"></i> Category *</label>
+            <select id="newItemCategory" required>
+              <option value="Pizza">Pizza</option>
+              <option value="Burgers">Burgers</option>
+              <option value="Sushi">Sushi</option>
+              <option value="Indian">Indian</option>
+              <option value="Healthy">Healthy</option>
+              <option value="Desserts">Desserts</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="newItemRestaurant"><i class="fas fa-store"></i> Restaurant Name</label>
+            <input type="text" id="newItemRestaurant" placeholder="e.g. Bella Italia" value="Bella Italia">
+          </div>
+
+          <div class="form-group full">
+            <label><i class="fas fa-camera"></i> Food Photo / Image URL *</label>
+            <div style="display: flex; gap: 12px; margin-bottom: 10px;">
+              <input type="url" id="newItemImage" placeholder="Enter image URL or select a preset below..." value="assets/images/margherita_pizza.png" required style="flex: 1;" oninput="updateImagePreview(this.value)">
+            </div>
+            
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">Or pick a preset photo:</div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;">
+              <button type="button" class="btn-outline" style="padding: 4px 12px; font-size: 0.8rem;" onclick="selectPresetPhoto('assets/images/margherita_pizza.png')">🍕 Pizza</button>
+              <button type="button" class="btn-outline" style="padding: 4px 12px; font-size: 0.8rem;" onclick="selectPresetPhoto('assets/images/chicken_burger.png')">🍔 Burger</button>
+              <button type="button" class="btn-outline" style="padding: 4px 12px; font-size: 0.8rem;" onclick="selectPresetPhoto('assets/images/sushi_platter.png')">🍣 Sushi</button>
+              <button type="button" class="btn-outline" style="padding: 4px 12px; font-size: 0.8rem;" onclick="selectPresetPhoto('assets/images/butter_chicken.png')">🍲 Curry</button>
+              <button type="button" class="btn-outline" style="padding: 4px 12px; font-size: 0.8rem;" onclick="selectPresetPhoto('assets/images/buddha_bowl.png')">🥗 Salad</button>
+              <button type="button" class="btn-outline" style="padding: 4px 12px; font-size: 0.8rem;" onclick="selectPresetPhoto('assets/images/chocolate_lava.png')">🍰 Dessert</button>
+            </div>
+
+            <!-- Live Image Preview Container -->
+            <div style="display: flex; align-items: center; gap: 16px; background: var(--bg-cream); padding: 14px; border-radius: var(--radius-sm); border: 1px dashed var(--border-color);">
+              <img id="imagePreviewBox" src="assets/images/margherita_pizza.png" alt="Photo Preview" style="width: 80px; height: 80px; border-radius: var(--radius-sm); object-fit: cover; border: 2px solid #FFF;">
+              <div>
+                <h5 style="font-size: 0.95rem; margin-bottom: 2px;">Live Photo Preview</h5>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0;">This image will appear in the food menu grid and product detail modal.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="newItemCalories"><i class="fas fa-fire"></i> Calories (kcal)</label>
+            <input type="number" id="newItemCalories" placeholder="e.g. 650" value="650">
+          </div>
+
+          <div class="form-group">
+            <label><i class="fas fa-seedling"></i> Dietary Tags</label>
+            <div style="display: flex; gap: 16px; padding-top: 10px;">
+              <label style="font-size: 0.88rem; font-weight: 600; cursor: pointer;"><input type="checkbox" id="newItemVeg" checked> Veg 🌱</label>
+              <label style="font-size: 0.88rem; font-weight: 600; cursor: pointer;"><input type="checkbox" id="newItemVegan"> Vegan</label>
+              <label style="font-size: 0.88rem; font-weight: 600; cursor: pointer;"><input type="checkbox" id="newItemGluten"> Gluten-Free 🌾</label>
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label for="newItemDescription"><i class="fas fa-align-left"></i> Description & Key Ingredients</label>
+            <textarea id="newItemDescription" rows="3" placeholder="Describe the flavors, texture, and main ingredients..."></textarea>
+          </div>
+
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; font-size: 1.05rem;">
+          <i class="fas fa-plus-circle"></i> Add Dish To Menu
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Shopping Cart Section -->
+  <section class="section-padding container" id="cart">
+    <div class="section-header">
+      <span class="sub-tag">Your Selection</span>
+      <h2>Shopping Cart</h2>
+      <p>Review items in your cart, apply promo codes, and proceed to checkout.</p>
+    </div>
+
+    <div class="cart-layout">
+      <div class="cart-items-box" id="cartItemsContainer">
+        <!-- Injected dynamically by JS -->
+      </div>
+      <div class="cart-summary-box" id="cartSummaryContainer">
+        <!-- Injected dynamically by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Checkout Section -->
+  <section class="section-padding container" id="checkout">
+    <div class="section-header">
+      <span class="sub-tag">Final Step</span>
+      <h2>Simulated Checkout</h2>
+      <p>Enter delivery details and select your preferred simulated payment option.</p>
+    </div>
+
+    <div class="checkout-layout">
+      <form id="checkoutForm">
+        <div class="checkout-step">
+          <h3><i class="fas fa-map-marker-alt"></i> 1. Delivery Address</h3>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>Full Delivery Address</label>
+              <input type="text" id="checkoutAddress" value="742 Evergreen Terrace, Springfield" required>
+            </div>
+            <div class="form-group">
+              <label>Building / Apartment</label>
+              <input type="text" value="Apt 4B" required>
+            </div>
+            <div class="form-group">
+              <label>Contact Phone</label>
+              <input type="text" value="+1 (555) 234-5678" required>
+            </div>
+            <div class="form-group full">
+              <label>Delivery Instructions (Optional)</label>
+              <input type="text" placeholder="e.g. Leave at front door or ring bell">
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-step">
+          <h3><i class="fas fa-clock"></i> 2. Delivery Time</h3>
+          <div style="display: flex; gap: 16px; margin-bottom: 12px;">
+            <label style="display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer;">
+              <input type="radio" name="delTime" checked> Instant Express (25-30 Min)
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer;">
+              <input type="radio" name="delTime"> Schedule Later
+            </label>
+          </div>
+        </div>
+
+        <div class="checkout-step">
+          <h3><i class="fas fa-shield-alt"></i> 3. Secure Online Payment</h3>
+          
+          <div class="payment-methods">
+            <div class="pay-card active" id="payMethodCard" onclick="selectPaymentMethod('card')">
+              <i class="fas fa-credit-card"></i>
+              <span>Credit / Debit Card</span>
+            </div>
+            <div class="pay-card" id="payMethodUpi" onclick="selectPaymentMethod('upi')">
+              <i class="fab fa-google-pay"></i>
+              <span>UPI / GPay / PhonePe</span>
+            </div>
+            <div class="pay-card" id="payMethodCod" onclick="selectPaymentMethod('cod')">
+              <i class="fas fa-money-bill-wave"></i>
+              <span>Cash On Delivery</span>
+            </div>
+          </div>
+
+          <!-- Credit Card Payment Option & Live Card Preview -->
+          <div id="cardPaymentForm">
+            <div class="card-preview">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <div class="card-chip"></div>
+                <i class="fab fa-cc-visa" style="font-size: 2.2rem; opacity: 0.9;"></i>
+              </div>
+              <div class="card-number-display" id="cardPreviewNumber">4532 •••• •••• 8892</div>
+              <div class="card-holder-row">
+                <div>
+                  <span style="font-size: 0.65rem; display: block; opacity: 0.7;">Card Holder</span>
+                  <span id="cardPreviewName">ALEX MORGAN</span>
+                </div>
+                <div>
+                  <span style="font-size: 0.65rem; display: block; opacity: 0.7;">Expires</span>
+                  <span id="cardPreviewExpiry">12/28</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group full">
+                <label>Cardholder Name *</label>
+                <input type="text" id="cardNameInput" value="Alex Morgan" placeholder="Name on card" oninput="updateCardPreview()" required>
+              </div>
+              <div class="form-group full">
+                <label>Card Number *</label>
+                <input type="text" id="cardNumberInput" value="4532 8892 1029 8892" placeholder="16 digit card number" maxlength="19" oninput="formatCardNumber(this); updateCardPreview();" required>
+              </div>
+              <div class="form-group">
+                <label>Expiry Date *</label>
+                <input type="text" id="cardExpiryInput" value="12/28" placeholder="MM/YY" maxlength="5" oninput="updateCardPreview()" required>
+              </div>
+              <div class="form-group">
+                <label>CVV / CVC *</label>
+                <input type="password" id="cardCvvInput" value="882" placeholder="3 digits" maxlength="4" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- UPI Payment Option -->
+          <div id="upiPaymentForm" style="display: none;">
+            <div style="background: var(--bg-cream); padding: 20px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 16px;">
+              <h4 style="margin-bottom: 8px;"><i class="fas fa-qrcode" style="color: var(--primary-orange);"></i> Instant UPI Payment</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">Enter your VPA / UPI ID to receive a payment request directly on your UPI app (GPay, PhonePe, Paytm, BHIM).</p>
+              <div class="form-group">
+                <label>UPI ID / VPA *</label>
+                <div style="display: flex; gap: 10px;">
+                  <input type="text" id="upiIdInput" value="alex@gpay" placeholder="username@upi or mobile@paytm" style="flex: 1;">
+                  <button type="button" class="btn-outline" onclick="showToast('UPI ID Verified!')">Verify UPI</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cash On Delivery Option -->
+          <div id="codPaymentForm" style="display: none;">
+            <div style="background: var(--bg-cream); padding: 20px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <h4 style="margin-bottom: 6px;"><i class="fas fa-hand-holding-usd" style="color: var(--veg-green);"></i> Cash / UPI on Delivery</h4>
+              <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0;">Pay using cash or scan delivery partner's QR code when your order arrives at your door.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 1.1rem;">Place Delivery Order <i class="fas fa-check-circle"></i></button>
+      </form>
+
+      <div class="cart-summary-box">
+        <h3 style="margin-bottom: 20px;">Order Review</h3>
+        <div id="checkoutOrderItems">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- User Account Section -->
+  <section class="section-padding container" id="account">
+    <div class="section-header">
+      <span class="sub-tag">User Dashboard</span>
+      <h2>My FreshBite Account</h2>
+      <p>Manage your profile, view order history, track active orders, and see saved wishlist items.</p>
+    </div>
+
+    <div class="account-layout">
+      <div class="account-sidebar">
+        <div class="profile-card">
+          <div class="profile-avatar"><i class="fas fa-user-check"></i></div>
+          <h3>Alex Morgan</h3>
+          <p style="color: var(--text-muted); font-size: 0.85rem;">alex.morgan@example.com</p>
+          <span style="display:inline-block; margin-top:8px; background:var(--primary-orange-light); color:var(--primary-orange); padding:4px 12px; border-radius:var(--radius-pill); font-size:0.75rem; font-weight:700;">FreshBite Gold Member</span>
+        </div>
+        <div class="account-nav">
+          <button class="account-nav-btn active"><i class="fas fa-box"></i> Order History</button>
+          <button class="account-nav-btn"><i class="fas fa-heart"></i> Saved Wishlist</button>
+          <button class="account-nav-btn"><i class="fas fa-map-marker-alt"></i> Saved Addresses</button>
+          <button class="account-nav-btn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+        </div>
+      </div>
+
+      <div class="account-content-card">
+        <h3 style="margin-bottom: 24px;">Past Orders</h3>
+        <div id="accountOrderHistory">
+          <!-- Injected dynamically by JS -->
+        </div>
+
+        <h3 style="margin: 36px 0 20px 0;">My Saved Wishlist</h3>
+        <div id="accountWishlistContainer">
+          <!-- Injected dynamically by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section class="section-padding container" id="about">
+    <div class="section-header">
+      <span class="sub-tag">Our Story</span>
+      <h2>About FreshBite</h2>
+      <p>Bringing restaurant-quality culinary experiences directly to your home with speed and care.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 60px;">
+      <div>
+        <h3 style="font-size: 2rem; margin-bottom: 16px;">Passion For Good Food & Express Delivery</h3>
+        <p style="color: var(--text-muted); margin-bottom: 16px;">Founded in 2024, FreshBite was created with a single vision: to connect food lovers with the highest quality local restaurants and kitchens seamlessly. We believe eating well should be effortless, delightful, and transparent.</p>
+        <p style="color: var(--text-muted);">Our fleet of eco-friendly delivery partners ensures your meals stay piping hot and fresh from the chef's pan to your dining table.</p>
+      </div>
+      <img src="assets/images/hero_banner.png" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-md);" alt="About FreshBite Kitchen">
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section class="section-padding container" id="contact">
+    <div class="section-header">
+      <span class="sub-tag">Get In Touch</span>
+      <h2>Contact Customer Support</h2>
+      <p>Have questions regarding your order or feedback for our team? We are here 24/7.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+      <div style="background:#FFF; padding:32px; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+        <h3 style="margin-bottom: 20px;">Support Hours & Info</h3>
+        <div style="display: flex; gap: 16px; margin-bottom: 20px;">
+          <i class="fas fa-headset" style="font-size: 1.8rem; color: var(--primary-orange);"></i>
+          <div>
+            <h4>Phone Support</h4>
+            <p style="color: var(--text-muted);">+1 (800) 555-FRESH (24/7 Available)</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; margin-bottom: 20px;">
+          <i class="fas fa-envelope" style="font-size: 1.8rem; color: var(--primary-orange);"></i>
+          <div>
+            <h4>Email Inquiry</h4>
+            <p style="color: var(--text-muted);">support@freshbite-food.com</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px;">
+          <i class="fas fa-map-marked-alt" style="font-size: 1.8rem; color: var(--primary-orange);"></i>
+          <div>
+            <h4>Headquarters</h4>
+            <p style="color: var(--text-muted);">100 Culinary Boulevard, Suite 500, Springfield</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#FFF; padding:32px; border-radius:var(--radius-md); border:1px solid var(--border-color);">
+        <h3 style="margin-bottom: 20px;">Send Us A Message</h3>
+        <form onsubmit="event.preventDefault(); showToast('Thank you! Your message has been sent.'); this.reset();">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label>Your Name</label>
+            <input type="text" placeholder="John Doe" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label>Email Address</label>
+            <input type="email" placeholder="john@example.com" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label>Message</label>
+            <textarea rows="4" placeholder="How can we help you today?" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%;">Submit Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Detail Modal -->
+  <div class="modal" id="productModal">
+    <div class="modal-content" id="productModalContent">
+      <!-- Injected dynamically by JS -->
+    </div>
+  </div>
+
+  <!-- Live Order Tracker Modal -->
+  <div class="modal" id="trackerModal">
+    <div class="modal-content" style="max-width: 600px;">
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+      <div class="product-modal-body" id="trackerModalBody">
+        <!-- Injected dynamically by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Authentication Modal -->
+  <div class="modal" id="authModal">
+    <div class="modal-content" style="max-width: 440px;">
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+      <div class="product-modal-body">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <div class="logo" style="justify-content: center; margin-bottom: 8px;"><i class="fas fa-utensils"></i> Fresh<span>Bite</span></div>
+          <h3>Welcome Back</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Sign in to track orders and save your delivery details.</p>
+        </div>
+        <form onsubmit="event.preventDefault(); closeModal(); showToast('Welcome back, Alex!');">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label>Email Address</label>
+            <input type="email" value="alex.morgan@example.com" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label>Password</label>
+            <input type="password" value="••••••••" required>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; margin-bottom: 12px;">Sign In</button>
+          <button type="button" class="btn-outline" style="width: 100%;" onclick="closeModal(); showToast('Logged in as Demo User');">Quick Demo Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Processing Overlay Modal -->
+  <div class="modal" id="paymentProcessingModal">
+    <div class="modal-content" style="max-width: 420px; text-align: center; padding: 40px 24px;">
+      <div class="spinner" style="margin-bottom: 20px;"></div>
+      <h3 style="margin-bottom: 8px;">Processing Payment...</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0;">Communicating with secure payment gateway. Please do not close or refresh this page.</p>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo" style="color:#FFF; margin-bottom:16px;"><i class="fas fa-utensils"></i> Fresh<span style="color:var(--primary-orange);">Bite</span></div>
+          <p>FreshBite is a premium online food ordering platform simulation providing quick delivery from top local kitchen partners.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#restaurants">Restaurants</a></li>
+            <li><a href="#menu">Food Menu</a></li>
+            <li><a href="#cart">Shopping Cart</a></li>
+            <li><a href="#account">User Account</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Top Categories</h4>
+          <ul class="footer-links">
+            <li><a href="#menu" onclick="filterCategory('Pizza', null)">Artisanal Pizza</a></li>
+            <li><a href="#menu" onclick="filterCategory('Burgers', null)">Gourmet Burgers</a></li>
+            <li><a href="#menu" onclick="filterCategory('Sushi', null)">Fresh Japanese Sushi</a></li>
+            <li><a href="#menu" onclick="filterCategory('Indian', null)">Indian Curries</a></li>
+            <li><a href="#menu" onclick="filterCategory('Healthy', null)">Healthy Buddha Bowls</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p>Subscribe to receive weekly promo discounts and culinary updates.</p>
+          <div style="display: flex; gap: 8px;">
+            <input type="email" placeholder="Your Email..." style="flex:1;">
+            <button class="btn-primary" onclick="showToast('Subscribed to newsletter!');">Join</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">
+        © 2026 FreshBite. Task WD-EC-001 • Data Alcott Systems Web Development Internship Submission.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function openAuthModal() {
+      document.getElementById('authModal').classList.add('active');
+    }
+  </script>
+  <!-- Core Script -->
+  <script src="script.js"></script>
+</body>
+</html>
